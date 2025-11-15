@@ -11,15 +11,19 @@ find_package(msgpack-cxx REQUIRED)
 # Build server
 add_executable(server server.cpp)
 
+add_executable(multithreadserver multithreadserver.cpp)
+
 # Build client
 add_executable(client client.cpp)
 
 # Link against msgpack-cxx
 target_link_libraries(server PRIVATE msgpackcxx)
+target_link_libraries(multithreadserver PRIVATE msgpackcxx)
 target_link_libraries(client PRIVATE msgpackcxx)
 
 # If you need Winsock on Windows:
 if(WIN32)
     target_link_libraries(server PRIVATE ws2_32)
+    target_link_libraries(multithreadserver PRIVATE ws2_32)
     target_link_libraries(client PRIVATE ws2_32)
 endif()
